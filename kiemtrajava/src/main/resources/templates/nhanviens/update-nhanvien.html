@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Cập nhật Nhân viên</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content" class="container">
+    <h1 class="mb-4">Cập nhật Nhân viên</h1>
+    <form th:action="@{/nhanviens/update/{id}(id=${nhanvien.id})}" th:object="${nhanvien}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <label for="maNV" class="form-label">Mã NV</label>
+            <input type="text" class="form-control" id="maNV" th:field="*{maNV}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tenNV" class="form-label">Tên</label>
+            <input type="text" class="form-control" id="tenNV" th:field="*{tenNV}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phai" class="form-label">Giới tính</label>
+            <select class="form-select" id="phai" th:field="*{phai}" required>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="noiSinh" class="form-label">Nơi sinh</label>
+            <input type="text" class="form-control" id="noiSinh" th:field="*{noiSinh}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phongban" class="form-label">Phòng ban</label>
+            <select class="form-select" id="phongban" th:field="*{phongban.id}" required>
+                <option th:each="phongban : ${phongbans}" th:value="${phongban.id}" th:text="${phongban.tenPhong}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="luong" class="form-label">Lương</label>
+            <input type="number" class="form-control" id="luong" th:field="*{luong}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </form>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
